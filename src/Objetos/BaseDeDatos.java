@@ -4,64 +4,50 @@ import java.util.ArrayList;
 
 public class BaseDeDatos {
 
-	private String nombre, login, password, repPassword, mail, userPerm;
-
+	private ArrayList<Usuario> usuarios;
+	
 	// Constructor para crear el Usuario:
-	public BaseDeDatos(String nombre, String login, String password, String repPassword, String mail, String userPerm) {
+	public BaseDeDatos() {
 		super();
-		this.nombre = nombre;
-		this.login = login;
-		this.password = password;
-		this.repPassword = repPassword;
-		this.mail = mail;
-		this.userPerm = userPerm;
+		this.usuarios = new ArrayList<Usuario>();
+	}
+
+	public Usuario getUsuarioByLogin(String login) {
+		for (Usuario usuario : usuarios) {
+			if(usuario.getLogin() == login) {
+				return usuario;
+			}
+		}
+		return null;
 	}
 	
-	// Constructor para Iniciar Sesion:
-	public BaseDeDatos(String login, String password) {
-		super();
-		this.login = login;
-		this.password = password;
+	public Usuario getUsuarioByPassword(String password) {
+		for (Usuario usuario : usuarios) {
+			if(usuario.getPassword() == password) {
+				return usuario;
+			}
+		}
+		return null;
+	}
+	
+	public Usuario getUsuarioByUserPerm(String userPerm) {
+		for (Usuario usuario : usuarios) {
+			if(usuario.getUserPerm() == userPerm) {
+				return usuario;
+			}
+		}
+		return null;
 	}
 	
 	// Getters y Setters:
-	// Nombre
-	public String getNombre() {
-		return nombre;
+	// Array Usuario
+	public ArrayList<Usuario> getUsuarios() {
+		return usuarios;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	// Login
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 	
-	// Password
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
-	// Permisos
-	public String getUserPerm() {
-		return userPerm;
-	}
-	public void setUserPerm(String userPerm) {
-		this.userPerm = userPerm;
-	}
 	
-	// toString para mostrar los Datos de prueba:
-	@Override
-	public String toString() {
-		return "BaseDeDatos [nombre=" + nombre + ", login=" + login + ", password=" + password + ", repPassword="
-				+ repPassword + ", mail=" + mail + ", userPerm=" + userPerm + "]";
-	}
-
-}
+} 

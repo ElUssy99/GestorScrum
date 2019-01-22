@@ -81,6 +81,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener{
 				p.add (lblRepetirPassword, gbc_lblRepetirPassword);
 				
 				JPasswordField textField = new JPasswordField (10);
+				textField.setEnabled(false);
 				GridBagConstraints gbc_textField = new GridBagConstraints();
 				gbc_textField.gridwidth = 4;
 				gbc_textField.fill = GridBagConstraints.HORIZONTAL;

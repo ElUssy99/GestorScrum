@@ -1,64 +1,38 @@
 package Objetos;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
+import Finestres.InternalFrame;
+import Finestres.Login;
 
 public class Main {
 	
 	public static void main(String[] args) {
-		ArrayList<String> datos = new ArrayList<String>();
-		ArrayList<String> permisos = new ArrayList<String>();
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		
-		String permisosString = "Master Owner;Scrum master;Developer;Administrador";
-		String[] permisosSplit = permisosString.split(";");
-		for (int i = 0; i < permisosSplit.length; i++) {
-			permisos.add(permisosSplit[i]);
+		Usuario usuari1 = new Usuario(1, "David", "ElUssy99", "hola", "hola", "xldaviduson@gmail.com", "Administrador");
+		Usuario usuari2 = new Usuario(2, "Marc", "ElMarki99", "adios", "adios", "calored98@gmail.com", "Administrador");
+		Usuario usuari3 = new Usuario(3, "Usuario3", "user3", "jaja", "jaja", "email3@gmail.com", "Scrum Master");
+		
+		usuarios.add(usuari1);
+		usuarios.add(usuari2);
+		usuarios.add(usuari3);
+		
+		BaseDeDatos bdd = new BaseDeDatos();
+		bdd.setUsuarios(usuarios);
+
+		usuarios = bdd.getUsuarios();
+		
+		for (Usuario usuario : usuarios) {
+			System.out.println(usuario);
+		}
+		System.out.println(bdd.getUsuarioByLogin("ElUssy99").getPassword());
+		
+		for (Usuario usuario : usuarios) {
+			System.out.print(usuario.getId() + " " + usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
 		}
 		
-		BaseDeDatos prueba = new BaseDeDatos("David", "ElUssy99", "MiNombreNoEsElUssy", "MiNombreNoEsElUssy", "xldaviduson@gmail.com", "Scrum Master");
-		BaseDeDatos prueba3 = new BaseDeDatos("David", "ElUssy99", "MiNombreNoEsElUssy", "MiNombreNoEsElUssy", "xldaviduson@gmail.com", "no tengo");
-		
-		BaseDeDatos prueba2 = new BaseDeDatos("Marc", "ElMarki", "MiNombreNoEsElMarki", "MiNombreNoEsElMarki 2", "calored11@gmail.com 2", "Administrador");
-		BaseDeDatos prueba4 = new BaseDeDatos("Marc", "ElMarki", "MiNombreNoEsElMarki", "MiNombreNoEsElMarki 2", "calored11@gmail.com 2", "no tengor");
-		
-		String bdd = prueba.toString();
-		String bdd2 = prueba2.toString();
-		
-		String bdd3 = prueba3.toString();
-		String bdd4 = prueba4.toString();
-		if(prueba.getUserPerm() == "Master Owner" || prueba.getUserPerm() == "Scrum Master" || prueba.getUserPerm() == "Developer" || prueba.getUserPerm() == "Administrador") {
-			System.out.println(prueba.toString());
-		}
-		
-		datos.add(bdd);
-		datos.add(bdd2);
-		datos.add(bdd3);
-		datos.add(bdd4);
-		
-		// Prueba para mostrar los datos de cada Objeto si tienen los permisos correctos.
-//		Iterator<String> datosIterator = datos.iterator();
-//		Iterator<String> permisosIterator = permisos.iterator();
-//		while(datosIterator.hasNext()){
-//			String elemento = datosIterator.next();
-//			int i = 0;
-//			while(permisosIterator.hasNext()) {
-//				if(prueba.getUserPerm() == permisos.get(i)) {
-//					System.out.print(elemento+" / ");
-//					System.out.println("");
-//				}
-//				i++;
-//			}
-//		}
-		
-		// Provabilidad de la Conexion con el Servidor.
-		String conexion = "ONLINE;OFFLINE";
-		String[] conexionSplit = conexion.split(";");
-		int provabilida = (int)(Math.random()*2);
-		if(provabilida == 0) {
-			System.out.println(conexionSplit[0]);
-		}else if(provabilida == 1) {
-			System.out.println(conexionSplit[1]);
-		}
+		new InternalFrame(bdd);
 		
 	}
 }
