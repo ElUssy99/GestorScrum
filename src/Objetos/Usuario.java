@@ -15,7 +15,8 @@ public class Usuario {
 		this.id = id;
 		this.nombre = nombre;
 		this.login = login;
-		this.password = repPassword;
+		this.password = password;
+		this.repPassword = repPassword;
 		this.mail = mail;
 		this.userPerm = userPerm;
 	}

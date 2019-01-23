@@ -21,7 +21,11 @@ import Objetos.BaseDeDatos;
 import Objetos.Usuario;
 
 public class Login extends JInternalFrame implements ActionListener {
-
+	
+	JPanel p;
+	JLabel label_1;
+	JLabel label ;
+	
 	private static JTextField textField_1;
 	private static JPasswordField textField;
 	public static String user, pass;
@@ -31,7 +35,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		// Se construye el panel que ira dentro del JInternalFrame
 		bd = bdd;
 		setTitle("login");
-		JPanel p = new JPanel();
+		p = new JPanel();
 		GridBagLayout gbl_p = new GridBagLayout();
 		gbl_p.columnWidths = new int[] { 38, 86, 51, 39, 43, 41, 0 };
 		gbl_p.rowHeights = new int[] { 20, 37, 23, 37, 42, 42, 0 };
@@ -49,7 +53,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		JLabel label_1 = new JLabel("Loguin: ");
+		label_1 = new JLabel("Loguin: ");
 		p.add(label_1, gbc);
 		GridBagConstraints gbc_1 = new GridBagConstraints();
 		gbc_1.gridwidth = 4;
@@ -59,7 +63,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		gbc_1.gridy = 1;
 		textField_1 = new JTextField(10);
 		p.add(textField_1, gbc_1);
-		JLabel label = new JLabel("Password: ");
+		label = new JLabel("Password: ");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.WEST;
 		gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -120,6 +124,8 @@ public class Login extends JInternalFrame implements ActionListener {
 		for (Usuario usuario : usuariosBDD) {
 			if (user.equals(usuario.getLogin()) && pass.equals(usuario.getPassword())) {
 				JOptionPane.showMessageDialog(null, "El Usuario " + user + " existe");
+				InternalFrame.lblNewLabel.setText(textField_1.getText());
+				// InternalFrame.lblNewLabel.setText(textField_1.getText() + " ( " + bdd.getUsuarioByUserPerm(textField_1.getText()) + " ) ");
 				existe = true;
 				return true;
 			}
@@ -145,7 +151,7 @@ public class Login extends JInternalFrame implements ActionListener {
 			e1.printStackTrace();
 		}
 	}
-
+	
 	public static String pasarDatos(BaseDeDatos bdd) {
 		return user + ";" + bdd.getUsuarioByLogin(user).getUserPerm();
 	}
