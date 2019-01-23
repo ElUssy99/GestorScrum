@@ -24,11 +24,6 @@ public class Main {
 		usuarios = bdd.getUsuarios();
 		
 		for (Usuario usuario : usuarios) {
-			System.out.println(usuario);
-		}
-		System.out.println(bdd.getUsuarioByLogin("ElUssy99").getPassword());
-		
-		for (Usuario usuario : usuarios) {
 			System.out.print(usuario.getId() + " " + usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
 		}
 		

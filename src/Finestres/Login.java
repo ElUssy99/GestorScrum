@@ -20,8 +20,11 @@ import javax.swing.JTextField;
 import Objetos.BaseDeDatos;
 import Objetos.Usuario;
 
-public class Login extends JInternalFrame implements ActionListener {
-
+public class Login extends JInternalFrame {
+	JPanel p;
+	JLabel label_1;
+	JLabel label ;
+	
 	private static JTextField textField_1;
 	private static JPasswordField textField;
 	public static String user, pass;
@@ -31,7 +34,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		// Se construye el panel que ira dentro del JInternalFrame
 		bd = bdd;
 		setTitle("login");
-		JPanel p = new JPanel();
+		 p = new JPanel();
 		GridBagLayout gbl_p = new GridBagLayout();
 		gbl_p.columnWidths = new int[] { 38, 86, 51, 39, 43, 41, 0 };
 		gbl_p.rowHeights = new int[] { 20, 37, 23, 37, 42, 42, 0 };
@@ -39,17 +42,16 @@ public class Login extends JInternalFrame implements ActionListener {
 		gbl_p.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		p.setLayout(gbl_p);
 
-		// Se construye el JInternalFrame
-//		JInternalFrame login = new JInternalFrame("Loguin");
+
 		setSize(332, 252);
-//		login.setLocation(46, 125);
+
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.insets = new Insets(0, 0, 5, 5);
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		JLabel label_1 = new JLabel("Loguin: ");
+		label_1 = new JLabel("Loguin: ");
 		p.add(label_1, gbc);
 		GridBagConstraints gbc_1 = new GridBagConstraints();
 		gbc_1.gridwidth = 4;
@@ -59,7 +61,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		gbc_1.gridy = 1;
 		textField_1 = new JTextField(10);
 		p.add(textField_1, gbc_1);
-		JLabel label = new JLabel("Password: ");
+		label = new JLabel("Password: ");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.WEST;
 		gbc_label.insets = new Insets(0, 0, 5, 5);
@@ -90,6 +92,36 @@ public class Login extends JInternalFrame implements ActionListener {
 				}
 			}
 		});
+		
+		textField_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comprobar(bd) == true) {
+					try {
+						setClosed(true);
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("vete a la mierda");
+				}
+			}
+		});
+		
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comprobar(bd) == true) {
+					try {
+						setClosed(true);
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("vete a la mierda");
+				}
+			}
+		});
 
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.gridwidth = 5;
@@ -99,9 +131,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		gbc_button.gridy = 5;
 		p.add(button, gbc_button);
 
-		textField_1.addActionListener(this);
-		textField.addActionListener(this);
-		button.addActionListener(this);
+
 
 		getContentPane().add(p);
 		// Por defecto el JInternalFrame no es redimensionable ni
@@ -112,7 +142,7 @@ public class Login extends JInternalFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	public static boolean comprobar(BaseDeDatos bdd) {
+	public boolean comprobar(BaseDeDatos bdd) {
 		user = textField_1.getText();
 		pass = textField.getText();
 		ArrayList<Usuario> usuariosBDD = bdd.getUsuarios();
@@ -120,7 +150,10 @@ public class Login extends JInternalFrame implements ActionListener {
 		for (Usuario usuario : usuariosBDD) {
 			if (user.equals(usuario.getLogin()) && pass.equals(usuario.getPassword())) {
 				JOptionPane.showMessageDialog(null, "El Usuario " + user + " existe");
+				System.out.println("Contenido de textfield: " + textField_1.getText());
+				InternalFrame.lblNewLabel.setText(textField_1.getText()+"("+bdd.getUsuarioByUserPerm(textField_1.getText())+")");
 				existe = true;
+				this.desktopIcon.setVisible(false);
 				return true;
 			}
 
@@ -136,17 +169,6 @@ public class Login extends JInternalFrame implements ActionListener {
 		comprobar(bd);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		try {
-			enterPressed(e);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
 
-	public static String pasarDatos(BaseDeDatos bdd) {
-		return user + ";" + bdd.getUsuarioByLogin(user).getUserPerm();
-	}
+
 }

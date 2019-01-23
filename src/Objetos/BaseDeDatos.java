@@ -8,7 +8,6 @@ public class BaseDeDatos {
 	
 	// Constructor para crear el Usuario:
 	public BaseDeDatos() {
-		super();
 		this.usuarios = new ArrayList<Usuario>();
 	}
 
@@ -30,10 +29,13 @@ public class BaseDeDatos {
 		return null;
 	}
 	
-	public Usuario getUsuarioByUserPerm(String userPerm) {
+	public String getUsuarioByUserPerm(String userPerm) {
+		
 		for (Usuario usuario : usuarios) {
-			if(usuario.getUserPerm() == userPerm) {
-				return usuario;
+			
+			if(usuario.getLogin().equals(userPerm)) {
+				
+				return usuario.getUserPerm();
 			}
 		}
 		return null;

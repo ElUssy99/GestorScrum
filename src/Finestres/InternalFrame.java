@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenuItem;
 
 public class InternalFrame {
-		
+	public static JLabel lblNewLabel;
 //	public static void main(String[] args) {
 //		new InternalFrame(bdd, user, userPerm);
 //	}
@@ -53,7 +53,10 @@ public class InternalFrame {
 		JMenu mnNewMenu_1 = new JMenu("Usuarios");
 		menuBar.add(mnNewMenu_1);
 		//mnNewMenu_1.setEnabled(false);
+		lblNewLabel = new JLabel();
 		
+		lblNewLabel.setBounds(380, 32, 142, 14);
+		v.getContentPane().add(lblNewLabel);
 		// Se mete el internal en el JDesktopPane (Nuevo usuario)
 		JMenuItem mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
 		mnNewMenu_1.add(mntmNuevoUsuario);
@@ -68,25 +71,12 @@ public class InternalFrame {
 		});
 		
 		JLabel lblNewLabel = new JLabel("Usuario:");
-		lblNewLabel.setBounds(428, 24, 47, 21);
+		lblNewLabel.setBounds(322, 32, 47, 14);
 		v.getContentPane().add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("SALIR");
 		btnNewButton.setBounds(610, 23, 89, 23);
 		v.getContentPane().add(btnNewButton);
-		
-//		String datos = login_.pasarDatos(bdd);
-//		String[] datosSplit = datos.split(";");
-//		JLabel label = new JLabel(datosSplit[0] + " ( " + " ) " + datosSplit[1]);
-//		JLabel label;
-//		if(login_.user == null && bdd.getUsuarioByUserPerm(login_.user) == null) {
-//			label = new JLabel();
-//		}else {
-//			label = new JLabel(login_.user + " ( " + bdd.getUsuarioByUserPerm(login_.user));
-//		}
-		JLabel label = new JLabel("--");
-		label.setBounds(494, 28, 94, 14);
-		v.getContentPane().add(label);
 		
 		
 		JLabel label_1 = new JLabel(conexion());

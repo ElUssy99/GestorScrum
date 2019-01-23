@@ -18,6 +18,7 @@ public class Usuario {
 		this.password = repPassword;
 		this.mail = mail;
 		this.userPerm = userPerm;
+	
 	}
 
 	public String getLogin() {
