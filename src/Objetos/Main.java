@@ -32,11 +32,7 @@ public class Main {
 		proyectos.add(proyecto2);
 		proyectos.add(proyecto3);
 		
-
 		usuarios = bdd.getUsuarios();
-		
-		
-	
 		
 		for (Usuario usuario : usuarios) {
 			System.out.print(usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
@@ -45,6 +41,5 @@ public class Main {
 			System.out.println(proyecto.getNombre()+" "+proyecto.getDescripcion()+" "+proyecto.getScrumMaster()+" "+proyecto.getProductOwner()+" "+"\n");
 		}
 		new InternalFrame(bdd);
-		
 	}
 }

@@ -39,7 +39,8 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 	JComboBox comboBox;
 	private JLabel label, lblNewLabel;
 	BaseDeDatos bd;
-	
+	private JButton btnNewButton;
+	boolean comprL ;
 	public NuevoUser(BaseDeDatos bdd) {
 		bd = bdd;
 		ArrayList<Usuario> usuariosBDD = bd.getUsuarios();
@@ -50,8 +51,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		GridBagLayout gbl_p = new GridBagLayout();
 		gbl_p.columnWidths = new int[] { 0, 65, 35, 51, 39, 43, 41, 0, 0, 0, 0, 0, 0 };
 		gbl_p.rowHeights = new int[] { 20, 37, 20, 18, 37, 42, 42, 0 };
-		gbl_p.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE, 0.0, 0.0,
-				0.0 };
+		gbl_p.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE, 0.0, 0.0, 0.0 };
 		gbl_p.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		p.setLayout(gbl_p);
 
@@ -75,6 +75,23 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		gbc_1.gridx = 3;
 		gbc_1.gridy = 1;
 		p.add(tfName, gbc_1);
+		
+		btnNewButton = new JButton("Generar Login");
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 comprL = generateUsername(bdd);
+				
+			}
+		});
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.gridwidth = 5;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 7;
+		gbc_btnNewButton.gridy = 1;
+		p.add(btnNewButton, gbc_btnNewButton);
 
 		lblLoguinGenerado = new JLabel("Loguin generado: ");
 		GridBagConstraints gbc_lblLoguinGenerado = new GridBagConstraints();
@@ -89,7 +106,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		lblNewLabel.setForeground(Color.RED);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.gridwidth = 6;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 7;
 		gbc_lblNewLabel.gridy = 2;
 		p.add(lblNewLabel, gbc_lblNewLabel);
@@ -144,7 +161,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		label.setForeground(Color.RED);
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.gridwidth = 6;
-		gbc_label.insets = new Insets(0, 0, 5, 5);
+		gbc_label.insets = new Insets(0, 0, 5, 0);
 		gbc_label.gridx = 7;
 		gbc_label.gridy = 4;
 		p.add(label, gbc_label);
@@ -185,7 +202,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 				String pass = "";
 				try {
 					pass = generarPasswd();
-					boolean comprPass = comprobarPassword();
+//					boolean comprPass = comprobarPassword();
 					passField.setText(pass);
 					passFieldRep.setText(pass);
 					JOptionPane.showMessageDialog(null, "La contraseña generada es: " + pass);
@@ -198,8 +215,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		});
 
 		comboBox = new JComboBox();
-		String[] permisos = { "Seleccionar un perfil de usuario", "Master Owner", "Scrum Master", "Developer",
-				"Administrador" };
+		String[] permisos = { "Seleccionar un perfil de usuario", "Master Owner", "Scrum Master", "Developer", "Administrador" };
 		for (int i = 0; i < permisos.length; i++) {
 			comboBox.addItem(permisos[i]);
 		}
@@ -225,10 +241,10 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				boolean compr = validaMail();
-				boolean comprL = generateUsername(bdd);
+				
 				boolean comprPass = comprobarPassword();
 				
-				if (comprPass = false) {
+				if (comprPass == false) {
 					label.setText("Contraseña incorrecta");
 					passField.setText("");
 					passFieldRep.setText("");
@@ -241,7 +257,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Error de Perfil: Datos incorrectos. ");
 				}
 				if (compr == true && comprL == true && comprPass == true) {
-					Usuario u = new Usuario(tfName.getText(), tfLogin.getText(), passField.getPassword().toString(), passFieldRep.getPassword().toString(), tfMail.getText(), comboBox.getSelectedItem().toString());
+					Usuario u = new Usuario(tfName.getText(), tfLogin.getText(), passField.getText(), passFieldRep.getText(), tfMail.getText(), comboBox.getSelectedItem().toString());
 					usuariosBDD.add(u);
 					
 					JOptionPane.showMessageDialog(null, "El usuario " + tfLogin.getText() + " a sido creado.");
@@ -252,6 +268,10 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 					passFieldRep.setText("");
 					tfMail.setText("");
 					comboBox.setSelectedIndex(0);
+					
+					for (Usuario usuario : usuariosBDD) {
+						System.out.print(usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
+					}
 				}
 			}
 		});
@@ -265,10 +285,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
+	public void actionPerformed(ActionEvent arg0) {}
 	
 	public static String generarPasswd() throws NoSuchAlgorithmException {
 		String[] symbols = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
@@ -313,7 +330,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 			String nickname = this.tfName.getText().split(" ")[0].toUpperCase().charAt(0)
 					+ this.tfName.getText().split(" ")[1].substring(0, 1).toUpperCase()
 					+ this.tfName.getText().split(" ")[1].substring(1).toLowerCase();
-
+			
 			int count = 0;
 			for (Usuario usuario : usuariosBDD) {
 				if (nickname.equals(usuario.getNombre())) {
@@ -330,7 +347,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 	}
 
 	private boolean comprobarPassword() {
-		if (!Arrays.equals(passField.getPassword(), passFieldRep.getPassword())) {
+		if (!passField.getText().equals(passFieldRep.getText())) {
 			label.setText("Contraseña incorrecta");
 			label.setVisible(true);
 			return false;

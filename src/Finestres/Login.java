@@ -85,7 +85,6 @@ public class Login extends JInternalFrame implements ActionListener {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} else {
 				}
 			}
 		});
@@ -99,8 +98,6 @@ public class Login extends JInternalFrame implements ActionListener {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} else {
-					System.out.println("vete a la mierda");
 				}
 			}
 		});
@@ -114,8 +111,6 @@ public class Login extends JInternalFrame implements ActionListener {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				} else {
-					System.out.println("vete a la mierda");
 				}
 			}
 		});
