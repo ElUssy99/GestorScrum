@@ -33,6 +33,5 @@ public class Main {
 		}
 		
 		new InternalFrame(bdd);
-		
 	}
 }
