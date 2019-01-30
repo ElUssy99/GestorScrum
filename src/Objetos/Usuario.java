@@ -4,21 +4,20 @@ public class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", login=" + login + ", password=" + password
+		return "Usuario [ nombre=" + nombre + ", login=" + login + ", password=" + password
 				+ ", repPassword=" + repPassword + ", mail=" + mail + ", userPerm=" + userPerm + "]";
 	}
 
-	private int id;
+
 	private String nombre, login, password, repPassword, mail, userPerm;
 	
-	public Usuario(int id, String nombre, String login, String password, String repPassword, String mail, String userPerm) {
-		this.id = id;
+	public Usuario(String nombre, String login, String password, String repPassword, String mail, String userPerm) {
 		this.nombre = nombre;
 		this.login = login;
-		this.password = password;
-		this.repPassword = repPassword;
+		this.password = repPassword;
 		this.mail = mail;
 		this.userPerm = userPerm;
+	
 	}
 
 	public String getLogin() {
@@ -59,14 +58,6 @@ public class Usuario {
 
 	public void setUserPerm(String userPerm) {
 		this.userPerm = userPerm;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNombre() {

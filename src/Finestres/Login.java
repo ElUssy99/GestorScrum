@@ -36,18 +36,14 @@ public class Login extends JInternalFrame implements ActionListener {
 		bd = bdd;
 		setTitle("login");
 		p = new JPanel();
+		
 		GridBagLayout gbl_p = new GridBagLayout();
 		gbl_p.columnWidths = new int[] { 38, 86, 51, 39, 43, 41, 0 };
 		gbl_p.rowHeights = new int[] { 20, 37, 23, 37, 42, 42, 0 };
 		gbl_p.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_p.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		p.setLayout(gbl_p);
-
-		// Se construye el JInternalFrame
-//		JInternalFrame login = new JInternalFrame("Loguin");
 		setSize(332, 252);
-//		login.setLocation(46, 125);
-
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.insets = new Insets(0, 0, 5, 5);
@@ -90,6 +86,35 @@ public class Login extends JInternalFrame implements ActionListener {
 						e.printStackTrace();
 					}
 				} else {
+				}
+			}
+		});
+		
+		textField_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comprobar(bd) == true) {
+					try {
+						setClosed(true);
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("vete a la mierda");
+				}
+			}
+		});
+		
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (comprobar(bd) == true) {
+					try {
+						setClosed(true);
+					} catch (PropertyVetoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
 					System.out.println("vete a la mierda");
 				}
 			}
@@ -102,11 +127,6 @@ public class Login extends JInternalFrame implements ActionListener {
 		gbc_button.gridx = 1;
 		gbc_button.gridy = 5;
 		p.add(button, gbc_button);
-
-		textField_1.addActionListener(this);
-		textField.addActionListener(this);
-		button.addActionListener(this);
-
 		getContentPane().add(p);
 		// Por defecto el JInternalFrame no es redimensionable ni
 		// tiene el botón de cerrar, así que se lo ponemos.
@@ -116,7 +136,8 @@ public class Login extends JInternalFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	public static boolean comprobar(BaseDeDatos bdd) {
+	public boolean comprobar(BaseDeDatos bdd) {
+		String[] permisos = { "Administrador", "Master Owner", "Scrum Master", "Developer" };
 		user = textField_1.getText();
 		pass = textField.getText();
 		ArrayList<Usuario> usuariosBDD = bdd.getUsuarios();
@@ -124,35 +145,39 @@ public class Login extends JInternalFrame implements ActionListener {
 		for (Usuario usuario : usuariosBDD) {
 			if (user.equals(usuario.getLogin()) && pass.equals(usuario.getPassword())) {
 				JOptionPane.showMessageDialog(null, "El Usuario " + user + " existe");
-				InternalFrame.lblNewLabel.setText(textField_1.getText());
-				// InternalFrame.lblNewLabel.setText(textField_1.getText() + " ( " + bdd.getUsuarioByUserPerm(textField_1.getText()) + " ) ");
+				// Mostrar por pantalla el resultado: del usuario que inicia sesion.
+				System.out.println("--El usuario \"" + textField_1.getText() + "\" ha iniciado sesion y es \"" + bdd.getUsuarioByUserPerm(textField_1.getText()) + "\"");
+				InternalFrame.lblNewLabel.setText(textField_1.getText() + "(" + bdd.getUsuarioByUserPerm(textField_1.getText()) + ")");
+				if (bdd.getUsuarioByUserPerm(textField_1.getText()) == permisos[0]) {
+					InternalFrame.mnNewMenu.setEnabled(true);
+					InternalFrame.mnNewMenu_1.setEnabled(true);
+					// Mostrar por pantalla el resultado: de los permisos que tiene.
+					System.out.println("--Este usuario tiene acceso al menu de Proyectos y Usuarios");
+				} else {
+					// Mostrar por pantalla el resultado: del unico permiso que tiene.
+					InternalFrame.mnNewMenu.setEnabled(true);
+					System.out.println("--Este usuario tiene acceso al menu de Proyectos");
+				}
 				existe = true;
+				this.desktopIcon.setVisible(false);
 				return true;
 			}
-
 		}
 		if (!existe) {
 			JOptionPane.showMessageDialog(null, "El Usuario " + user + " no existe");
 		}
 		return false;
-
 	}
 
 	public void enterPressed(ActionEvent e) throws IOException {
 		comprobar(bd);
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			enterPressed(e);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	}
-	
-	public static String pasarDatos(BaseDeDatos bdd) {
-		return user + ";" + bdd.getUsuarioByLogin(user).getUserPerm();
 	}
 }

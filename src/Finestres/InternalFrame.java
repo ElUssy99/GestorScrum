@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import Objetos.BaseDeDatos;
+import Objetos.Usuario;
 
 import javax.swing.JMenuBar;
 
@@ -16,12 +17,14 @@ import javax.swing.JMenu;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
 
 public class InternalFrame {
 	
 	public static JLabel lblNewLabel;
+	public static JMenu mnNewMenu, mnNewMenu_1;
 
 	public InternalFrame(BaseDeDatos bdd) {
 		// El JFrame con el JDesktopPane
@@ -43,49 +46,75 @@ public class InternalFrame {
 		menuBar.setBounds(0, 0, 709, 21);
 		v.getContentPane().add(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("Proyecto");
+		mnNewMenu = new JMenu("Proyecto");
 		menuBar.add(mnNewMenu);
+		mnNewMenu.setEnabled(false);
 		
-		JMenu mnNewMenu_1 = new JMenu("Usuarios");
+		mnNewMenu_1 = new JMenu("Usuarios");
 		menuBar.add(mnNewMenu_1);
+		mnNewMenu_1.setEnabled(false);
 		
 		lblNewLabel = new JLabel();
-		lblNewLabel.setBounds(485, 24, 115, 22);
+		lblNewLabel.setBounds(380, 32, 142, 14);
 		v.getContentPane().add(lblNewLabel);
 		
 		// Se mete el internal en el JDesktopPane (Nuevo usuario)
 		JMenuItem mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
 		mnNewMenu_1.add(mntmNuevoUsuario);
 		
+		JMenuItem mntmBuscarUsuario = new JMenuItem("Buscar/Modificar Usuario");
+		mnNewMenu_1.add(mntmBuscarUsuario);
+		
+		JMenuItem mntmNuevoProjecto = new JMenuItem("Nuevo Projecto");
+		mnNewMenu.add(mntmNuevoProjecto);
+		
+		JMenuItem mntmMostrarProyectos = new JMenuItem("Mostrar Proyectos");
+		mnNewMenu.add(mntmMostrarProyectos);
+		
+		// Abre la pestaña de Nuevo Proyecto.
+		mntmNuevoProjecto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NuevoProyecto np = new NuevoProyecto(bdd);
+				np.setLocation(47,11);
+				dp.add(np);
+			}
+		});
+		
+		// Abre la pestaña de Nuevo Usuario.
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				NuevoUser nu= new NuevoUser();
+				NuevoUser nu = new NuevoUser(bdd);
 				nu.setLocation(47, 11);
 				dp.add(nu);
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("Usuario:");
-		lblNewLabel.setBounds(428, 24, 47, 21);
-		v.getContentPane().add(lblNewLabel);
+		JLabel lblUser = new JLabel("Usuario:");
+		lblUser.setBounds(322, 32, 47, 14);
+		v.getContentPane().add(lblUser);
 		
-		JButton btnNewButton = new JButton("SALIR");
-		btnNewButton.setBounds(610, 23, 89, 23);
+		JButton btnNewButton = new JButton("LOGIN/SALIR");
+		btnNewButton.setBounds(586, 23, 113, 23);
 		v.getContentPane().add(btnNewButton);
 		
 		JLabel label_1 = new JLabel(conexion());
 		label_1.setBounds(10, 32, 76, 14);
 		v.getContentPane().add(label_1);
 		
+		// Boton SALIR: Sirve para salir del usuario e iniciar sesion otra vez.
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lblNewLabel.setText("");
+				mnNewMenu.setEnabled(false);
+				mnNewMenu_1.setEnabled(false);
+				
 				Login login_ = new Login(bdd);
 				login_.setLocation(87, 85);
-				if(!login_.isShowing()) {
-					dp.add(login_);	
-				}
+				dp.add(login_);
+				
 			}
 		});
 		
