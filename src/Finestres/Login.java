@@ -131,8 +131,10 @@ public class Login extends JInternalFrame implements ActionListener {
 		setVisible(true);
 	}
 
+//	Els usuaris poden ser de tipus: Developer( només pot visualitzar les dades), Product Owner(pot visualitzar les dades i afegir/modificar/esborrar especificacions),
+//	Scrum Master(pot visualitzar les dades, crear projectes, crear sprints, temporitza especificacions i sprints, assignar especifiacions a sprints), Administrador d'usuaris(pot crear usuaris).
 	public boolean comprobar(BaseDeDatos bdd) {
-		String[] permisos = { "Administrador", "Master Owner", "Scrum Master", "Developer" };
+		String[] permisos = { "Administrador", "Product Owner", "Scrum Master", "Developer" };
 		user = textField_1.getText();
 		pass = textField.getText();
 		ArrayList<Usuario> usuariosBDD = bdd.getUsuarios();
@@ -143,15 +145,32 @@ public class Login extends JInternalFrame implements ActionListener {
 				// Mostrar por pantalla el resultado: del usuario que inicia sesion.
 				System.out.println("--El usuario \"" + textField_1.getText() + "\" ha iniciado sesion y es \"" + bdd.getUsuarioByUserPerm(textField_1.getText()) + "\"");
 				InternalFrame.lblNewLabel.setText(textField_1.getText() + "(" + bdd.getUsuarioByUserPerm(textField_1.getText()) + ")");
+				// ADMINISTRADOR:
 				if (bdd.getUsuarioByUserPerm(textField_1.getText()) == permisos[0]) {
-					InternalFrame.mnNewMenu.setEnabled(true);
 					InternalFrame.mnNewMenu_1.setEnabled(true);
 					// Mostrar por pantalla el resultado: de los permisos que tiene.
-					System.out.println("--Este usuario tiene acceso al menu de Proyectos y Usuarios");
-				} else {
-					// Mostrar por pantalla el resultado: del unico permiso que tiene.
+					System.out.println("--Este usuario tiene acceso al menu de Usuarios");
+					// Tiene todos los permisos para manipular Usuarios.
+				// SCRUM MASTER:
+				} else if(bdd.getUsuarioByUserPerm(textField_1.getText()) == permisos[2]) {
 					InternalFrame.mnNewMenu.setEnabled(true);
+					// Mostrar por pantalla el resultado: del unico permiso que tiene.
 					System.out.println("--Este usuario tiene acceso al menu de Proyectos");
+					// Tienen todos los permisos para manipular Proyectos y editar todas las subramas de los Proyectos.
+				// DEVELOPER:
+				} else if(bdd.getUsuarioByUserPerm(textField_1.getText()) == permisos[3]) {
+					InternalFrame.mnNewMenu.setEnabled(true);
+					InternalFrame.mntmNuevoProjecto.setEnabled(false);
+					InternalFrame.mntmMostrarProyectos.setEnabled(true);
+					System.out.println("--Este usuario tiene acceso al menu de Proyectos, pero solo visualizacion de Datos.");
+					// Tiene solo permisos para visualizar datos de los Poryectos.
+				// PRODUCT OWNER:
+				} else if(bdd.getUsuarioByUserPerm(textField_1.getText()) == permisos[1]) {
+					InternalFrame.mnNewMenu.setEnabled(true);
+					InternalFrame.mntmNuevoProjecto.setEnabled(false);
+					InternalFrame.mntmMostrarProyectos.setEnabled(true);
+					System.out.println("--Este usuario tiene acceso al menu de Proyectos, pero solo visualizacion de Datos.");
+					// Tiene solo permisos para visualizar datos de los Proyectos y editar especificaciones.
 				}
 				existe = true;
 				this.desktopIcon.setVisible(false);

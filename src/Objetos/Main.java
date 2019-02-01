@@ -37,9 +37,11 @@ public class Main {
 		for (Usuario usuario : usuarios) {
 			System.out.print(usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
 		}
+		System.out.println("");
 		for (Proyectos proyecto : proyectos) {
-			System.out.println(proyecto.getNombre()+" "+proyecto.getDescripcion()+" "+proyecto.getScrumMaster()+" "+proyecto.getProductOwner()+" "+"\n");
+			System.out.println(proyecto.getNombre()+" "+proyecto.getDescripcion()+" "+proyecto.getScrumMaster()+" "+proyecto.getProductOwner());
 		}
+		System.out.println("");
 		new InternalFrame(bdd);
 	}
 }

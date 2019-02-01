@@ -25,6 +25,7 @@ public class InternalFrame {
 	
 	public static JLabel lblNewLabel;
 	public static JMenu mnNewMenu, mnNewMenu_1;
+	public static JMenuItem mntmNuevoUsuario, mntmBuscarUsuario, mntmNuevoProjecto, mntmMostrarProyectos;
 
 	public InternalFrame(BaseDeDatos bdd) {
 		// El JFrame con el JDesktopPane
@@ -59,16 +60,16 @@ public class InternalFrame {
 		v.getContentPane().add(lblNewLabel);
 		
 		// Se mete el internal en el JDesktopPane (Nuevo usuario)
-		JMenuItem mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
+		mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
 		mnNewMenu_1.add(mntmNuevoUsuario);
 		
-		JMenuItem mntmBuscarUsuario = new JMenuItem("Buscar/Modificar Usuario");
+		mntmBuscarUsuario = new JMenuItem("Buscar/Modificar Usuario");
 		mnNewMenu_1.add(mntmBuscarUsuario);
 		
-		JMenuItem mntmNuevoProjecto = new JMenuItem("Nuevo Projecto");
+		mntmNuevoProjecto = new JMenuItem("Nuevo Projecto");
 		mnNewMenu.add(mntmNuevoProjecto);
 		
-		JMenuItem mntmMostrarProyectos = new JMenuItem("Mostrar Proyectos");
+		mntmMostrarProyectos = new JMenuItem("Mostrar Proyectos");
 		mnNewMenu.add(mntmMostrarProyectos);
 		
 		// Abre la pestaña de Nuevo Proyecto.
