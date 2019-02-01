@@ -3,21 +3,14 @@ package Finestres;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JCheckBox;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JSpinner;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 
@@ -50,6 +43,8 @@ public class Sprints extends JFrame {
 	 * Create the InteralFrame.
 	 */
 	public Sprints() {
+		ArrayList<Especificacion> arrayEsp = new ArrayList<Especificacion>();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 598, 467);
 		contentPane = new JPanel();
@@ -78,10 +73,19 @@ public class Sprints extends JFrame {
 		e.setBounds(22, 47, 535, 125);
 		contentPane.add(e);
 		
+//		Especificacion e2 = new Especificacion();
+//		e2.setBounds(22, 175, 535, 125);
+//		contentPane.add(e2);
+//		
+//		Especificacion e3 = new Especificacion();
+//		e3.setBounds(22, 303, 535, 125);
+//		contentPane.add(e3);
+		
 		btnAadir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Especificacion e2 = new Especificacion();
+				arrayEsp.add(e);
 				e2.setBounds(22, 175, 535, 125);
 				contentPane.add(e);
 			}
