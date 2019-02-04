@@ -32,6 +32,16 @@ public class Especificacion extends JPanel{
 	public Especificacion() {
 		String[] sprints = {"Sprint 1","Sprint 2","Sprint 3"};
 		
+//		String datos = datosUser.substring(datosUser.indexOf("("+1), datosUser.indexOf(""));
+//		
+//		if(datos == "Developer") {
+//			chMarcar.setEnabled(false);
+//			btnGuardarCambios.setEnabled(false);
+//			spinner.setEnabled(false);
+//			comboBox.setEnabled(false);
+//			btnGuardarCambios.setEnabled(false);
+//		}
+		
 		textArea = new JTextArea();
 		scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

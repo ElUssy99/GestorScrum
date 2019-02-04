@@ -34,7 +34,7 @@ public class Login extends JInternalFrame implements ActionListener {
 	public Login(BaseDeDatos bdd) {
 		// Se construye el panel que ira dentro del JInternalFrame
 		bd = bdd;
-		setTitle("login");
+		setTitle("Login");
 		p = new JPanel();
 		
 		GridBagLayout gbl_p = new GridBagLayout();
@@ -144,7 +144,9 @@ public class Login extends JInternalFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "El Usuario " + user + " existe");
 				// Mostrar por pantalla el resultado: del usuario que inicia sesion.
 				System.out.println("--El usuario \"" + textField_1.getText() + "\" ha iniciado sesion y es \"" + bdd.getUsuarioByUserPerm(textField_1.getText()) + "\"");
-				InternalFrame.lblNewLabel.setText(textField_1.getText() + "(" + bdd.getUsuarioByUserPerm(textField_1.getText()) + ")");
+				// Pasar los datos del usuario que se registra en la pantalla de Login y a la pantalla de InteralFrame.
+				String datosUser = textField_1.getText() + "(" + bdd.getUsuarioByUserPerm(textField_1.getText()) + ")";
+				InternalFrame.lblNewLabel.setText(datosUser);
 				// ADMINISTRADOR:
 				if (bdd.getUsuarioByUserPerm(textField_1.getText()) == permisos[0]) {
 					InternalFrame.mnNewMenu_1.setEnabled(true);

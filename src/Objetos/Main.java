@@ -16,8 +16,9 @@ public class Main {
 		
 		Usuario usuari1 = new Usuario("David", "ElUssy99", "hola", "hola", "xldaviduson@gmail.com", "Administrador");
 		Usuario usuari2 = new Usuario("Marc", "ElMarki99", "adios", "adios", "calored98@gmail.com", "Administrador");
-		Usuario usuari3 = new Usuario("Usuario3", "user3", "jaja", "jaja", "email3@gmail.com", "Scrum Master");
-		Usuario usuari4 = new Usuario("Mark", "ElMarki98", "adioss", "adioss", "calored99@gmail.com", "Product Owner");
+		Usuario usuari3 = new Usuario("userSM", "userSM", "jaja", "jaja", "userSM@gmail.com", "Scrum Master");
+		Usuario usuari4 = new Usuario("userPO", "userPO", "jaja", "jaja", "userPO@gmail.com", "Product Owner");
+		Usuario usuari5 = new Usuario("userDev", "userDev", "jaja", "jaja", "userDev@gmail.com", "Developer");
 		
 		Proyectos proyecto1= new Proyectos("proyectoMotor", "Creacion de una aplicacion de compra de coches y motos","Usuario3","Mark");
 		Proyectos proyecto2= new Proyectos("proyectoPagWeb", "Creacion de una paguina web","Usuario3","Mark");
@@ -27,6 +28,7 @@ public class Main {
 		usuarios.add(usuari2);
 		usuarios.add(usuari3);
 		usuarios.add(usuari4);
+		usuarios.add(usuari5);
 		
 		proyectos.add(proyecto1);
 		proyectos.add(proyecto2);
@@ -34,10 +36,12 @@ public class Main {
 		
 		usuarios = bdd.getUsuarios();
 		
+		System.out.println("Usuarios:");
 		for (Usuario usuario : usuarios) {
 			System.out.print(usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
 		}
 		System.out.println("");
+		System.out.println("Proyectos:");
 		for (Proyectos proyecto : proyectos) {
 			System.out.println(proyecto.getNombre()+" "+proyecto.getDescripcion()+" "+proyecto.getScrumMaster()+" "+proyecto.getProductOwner());
 		}

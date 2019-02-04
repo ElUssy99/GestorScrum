@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -14,11 +14,11 @@ import javax.swing.JButton;
 import java.awt.Color;
 import net.miginfocom.swing.MigLayout;
 
-public class Sprints extends JFrame {
+public class Sprints extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JScrollPane jsp;
-	private int contador = 175;
+	private int contador;
 	
 //	public static String nSplit, txtTArea, horas;
 //	public static boolean marcado;
@@ -26,35 +26,41 @@ public class Sprints extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Sprints frame = new Sprints();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Sprints frame = new Sprints();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the InteralFrame.
 	 */
 	public Sprints() {
-		ArrayList<Especificacion> arrayEsp = new ArrayList<Especificacion>();
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 598, 467);
+		// Falta el nombre del proyecto en el titulo:
+		setTitle("Especificaciones del proyecto ");
+		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 598, 432);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 51, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		jsp = new JScrollPane(contentPane);
-		jsp.setVisible(true);
-		//Cambiar por el JScrollPane aqui abjo
-		setContentPane(jsp);
+		setVisible(true);
+//		contentPane.setLayout(null);
+		
+		ArrayList<Especificacion> arrayEsp = new ArrayList<Especificacion>();
+		contador = 175;
 		contentPane.setLayout(null);
+		
+		Especificacion e2 = new Especificacion();
+		e2.setBounds(10, 42, 535, 125);
+		contentPane.add(e2);
+		arrayEsp.add(e2);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 580, 31);
@@ -70,24 +76,18 @@ public class Sprints extends JFrame {
 		panel.add(btnAadir);
 		
 		Especificacion e = new Especificacion();
-		e.setBounds(22, 47, 535, 125);
+		e.setBounds(10, 172, 535, 125);
 		contentPane.add(e);
-		
-//		Especificacion e2 = new Especificacion();
-//		e2.setBounds(22, 175, 535, 125);
-//		contentPane.add(e2);
-//		
-//		Especificacion e3 = new Especificacion();
-//		e3.setBounds(22, 303, 535, 125);
-//		contentPane.add(e3);
+		arrayEsp.add(e);
 		
 		btnAadir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Especificacion e2 = new Especificacion();
-				arrayEsp.add(e);
-				e2.setBounds(22, 175, 535, 125);
-				contentPane.add(e);
+				Especificacion e3 = new Especificacion();
+				contador = contador + 43;
+				e3.setBounds(23, contador, 535, 125);
+				contentPane.add(e3);
+				arrayEsp.add(e3);
 			}
 		});
 		
@@ -95,86 +95,15 @@ public class Sprints extends JFrame {
 		btnEliminar.setBounds(332, 6, 100, 23);
 		panel.add(btnEliminar);
 		
-//		contentPane.add(new Especificacion(), "cell 0 " + contador+1 + ",alignx center,aligny top");
-//		contentPane.add(new Especificacion(), "cell 0 " + contador+1 + ",alignx center,aligny top");
-//		contentPane.add(new Especificacion(), "cell 0 " + contador+1 + ",alignx center,aligny top");
+		// Añadir el JScrollPane al JPanel.
+		jsp = new JScrollPane(contentPane,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		getContentPane().add(jsp);
 		
-//		Especificacion especificacion = new Especificacion();
-//		contentPane.add(especificacion, "cell 0 2,alignx center,aligny top");
-		
-//		JPanel panel_1 = new JPanel();
-//		contentPane.add(panel_1, "cell 0 1,alignx center,aligny top");
-//		
-//		JTextArea textArea = new JTextArea();
-//		JScrollPane scroll = new JScrollPane(textArea);
-//		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-//		
-//		JCheckBox chckbxMarcar = new JCheckBox("Marcar");
-//		
-//		JButton btnGuardarCambios = new JButton("Guardar cambios");
-//		
-//		JSpinner spinner = new JSpinner();
-//		
-//		JLabel lblNumeroDeHoras = new JLabel("Numero de horas");
-//		
-//		JComboBox comboBox = new JComboBox();
-//		for (int i = 0; i < sprints.length; i++) {
-//			comboBox.addItem(sprints[i]);
-//		}
-//		
-//		btnGuardarCambios.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				nSplit = (String) comboBox.getSelectedItem();
-//				txtTArea = textArea.getText();
-//				horas = spinner.getValue().toString();
-//				if(chckbxMarcar.isSelected()) {
-//					marcado = true;
-//				}else {
-//					marcado = false;
-//				}
-//				System.out.println(nSplit + " " + horas + " " + marcado + "\n" + txtTArea);
-//			}
-//		});
-//		
-//		// Layout:
-//		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-//		gl_panel_1.setHorizontalGroup(
-//			gl_panel_1.createParallelGroup(Alignment.LEADING)
-//				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-//					.addContainerGap(53, Short.MAX_VALUE)
-//					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-//						.addGroup(gl_panel_1.createSequentialGroup()
-//							.addGap(16)
-//							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-//							.addPreferredGap(ComponentPlacement.RELATED)
-//							.addComponent(lblNumeroDeHoras)
-//							.addPreferredGap(ComponentPlacement.RELATED)
-//							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-//							.addPreferredGap(ComponentPlacement.RELATED)
-//							.addComponent(btnGuardarCambios)
-//							.addPreferredGap(ComponentPlacement.RELATED)
-//							.addComponent(chckbxMarcar)
-//							.addContainerGap())
-//						.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-//							.addComponent(scroll, GroupLayout.PREFERRED_SIZE, 428, GroupLayout.PREFERRED_SIZE)
-//							.addGap(54))))
-//		);
-//		gl_panel_1.setVerticalGroup(
-//			gl_panel_1.createParallelGroup(Alignment.LEADING)
-//				.addGroup(gl_panel_1.createSequentialGroup()
-//					.addContainerGap()
-//					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-//						.addComponent(chckbxMarcar)
-//						.addComponent(btnGuardarCambios)
-//						.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-//						.addComponent(lblNumeroDeHoras)
-//						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-//					.addPreferredGap(ComponentPlacement.RELATED)
-//					.addComponent(scroll, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-//					.addContainerGap(19, Short.MAX_VALUE))
-//		);
-//		panel_1.setLayout(gl_panel_1);
+		setResizable(true);
+		setClosable(true);
+		// Se visualiza el JInternalFrame
+		setVisible(true);
 	}
 }

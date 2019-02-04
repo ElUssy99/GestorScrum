@@ -59,6 +59,8 @@ public class InternalFrame {
 		lblNewLabel.setBounds(380, 32, 142, 14);
 		v.getContentPane().add(lblNewLabel);
 		
+		String datosUser = lblNewLabel.getText();
+		
 		// Se mete el internal en el JDesktopPane (Nuevo usuario)
 		mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
 		mnNewMenu_1.add(mntmNuevoUsuario);
@@ -71,6 +73,15 @@ public class InternalFrame {
 		
 		mntmMostrarProyectos = new JMenuItem("Mostrar Proyectos");
 		mnNewMenu.add(mntmMostrarProyectos);
+		
+		mntmMostrarProyectos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Sprints s = new Sprints();
+				s.setLocation(47, 11);
+				dp.add(s);
+			}
+		});
 		
 		// Abre la pestaña de Nuevo Proyecto.
 		mntmNuevoProjecto.addActionListener(new ActionListener() {
@@ -108,6 +119,7 @@ public class InternalFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("--El usuario ha salido de su sesion.");
 				lblNewLabel.setText("");
 				mnNewMenu.setEnabled(false);
 				mnNewMenu_1.setEnabled(false);
