@@ -51,16 +51,10 @@ public class Sprints extends JInternalFrame {
 		contentPane.setBackground(new Color(255, 51, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setVisible(true);
-//		contentPane.setLayout(null);
 		
 		ArrayList<Especificacion> arrayEsp = new ArrayList<Especificacion>();
-		contador = 175;
+		contador = 172;
 		contentPane.setLayout(null);
-		
-		Especificacion e2 = new Especificacion();
-		e2.setBounds(10, 42, 535, 125);
-		contentPane.add(e2);
-		arrayEsp.add(e2);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 580, 31);
@@ -76,16 +70,21 @@ public class Sprints extends JInternalFrame {
 		panel.add(btnAadir);
 		
 		Especificacion e = new Especificacion();
-		e.setBounds(10, 172, 535, 125);
+		e.setBounds(10, 42, 535, 125);
 		contentPane.add(e);
 		arrayEsp.add(e);
+		
+		Especificacion e2 = new Especificacion();
+		e2.setBounds(10, 172, 535, 125);
+		contentPane.add(e2);
+		arrayEsp.add(e2);
 		
 		btnAadir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Especificacion e3 = new Especificacion();
-				contador = contador + 43;
-				e3.setBounds(23, contador, 535, 125);
+				contador = contador + 130;
+				e3.setBounds(10, contador, 535, 125);
 				contentPane.add(e3);
 				arrayEsp.add(e3);
 			}

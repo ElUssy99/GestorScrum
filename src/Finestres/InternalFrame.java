@@ -77,9 +77,9 @@ public class InternalFrame {
 		mntmMostrarProyectos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Sprints s = new Sprints();
-				s.setLocation(47, 11);
-				dp.add(s);
+//				Sprints s = new Sprints();
+//				s.setLocation(47, 11);
+//				dp.add(s);
 			}
 		});
 		
