@@ -25,13 +25,14 @@ public class InternalFrame {
 	
 	public static JLabel lblNewLabel;
 	public static JMenu mnNewMenu, mnNewMenu_1;
+	public static JDesktopPane dp;
 	public static JMenuItem mntmNuevoUsuario, mntmBuscarUsuario, mntmNuevoProjecto, mntmMostrarProyectos;
 
 	public InternalFrame(BaseDeDatos bdd) {
 		// El JFrame con el JDesktopPane
 		JFrame v = new JFrame("Gestor de Proyectos");
 		v.getContentPane().setLayout(null);
-		JDesktopPane dp = new JDesktopPane();
+		dp = new JDesktopPane();
 		dp.setBounds(10, 57, 689, 474);
 		dp.setBackground(Color.YELLOW);
 		
@@ -59,9 +60,6 @@ public class InternalFrame {
 		lblNewLabel.setBounds(380, 32, 142, 14);
 		v.getContentPane().add(lblNewLabel);
 		
-		String datosUser = lblNewLabel.getText();
-		
-		// Se mete el internal en el JDesktopPane (Nuevo usuario)
 		mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
 		mnNewMenu_1.add(mntmNuevoUsuario);
 		
@@ -77,9 +75,11 @@ public class InternalFrame {
 		mntmMostrarProyectos.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				Sprints s = new Sprints();
-//				s.setLocation(47, 11);
-//				dp.add(s);
+				System.out.println("--El usuario quiere visualizar los proyectos.");
+				String datosUser = lblNewLabel.getText();
+				MostrarProyectos mp= new MostrarProyectos(bdd, datosUser);
+				mp.setLocation(40,0);
+				dp.add(mp);
 			}
 		});
 		
@@ -119,7 +119,6 @@ public class InternalFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("--El usuario ha salido de su sesion.");
 				lblNewLabel.setText("");
 				mnNewMenu.setEnabled(false);
 				mnNewMenu_1.setEnabled(false);
@@ -130,12 +129,13 @@ public class InternalFrame {
 				
 			}
 		});
+		v.setResizable(true);
 		
 		v.setSize(725,580);
 		v.setVisible(true);
 		v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
-	
+
 	public static String conexion() {
 		// Provabilidad de la Conexion con el Servidor.
 		String conexion = "ONLINE;OFFLINE";

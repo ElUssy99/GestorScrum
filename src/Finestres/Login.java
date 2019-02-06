@@ -34,7 +34,7 @@ public class Login extends JInternalFrame implements ActionListener {
 	public Login(BaseDeDatos bdd) {
 		// Se construye el panel que ira dentro del JInternalFrame
 		bd = bdd;
-		setTitle("Login");
+		setTitle("login");
 		p = new JPanel();
 		
 		GridBagLayout gbl_p = new GridBagLayout();
@@ -131,10 +131,8 @@ public class Login extends JInternalFrame implements ActionListener {
 		setVisible(true);
 	}
 
-//	Els usuaris poden ser de tipus: Developer( només pot visualitzar les dades), Product Owner(pot visualitzar les dades i afegir/modificar/esborrar especificacions),
-//	Scrum Master(pot visualitzar les dades, crear projectes, crear sprints, temporitza especificacions i sprints, assignar especifiacions a sprints), Administrador d'usuaris(pot crear usuaris).
 	public boolean comprobar(BaseDeDatos bdd) {
-		String[] permisos = { "Administrador", "Product Owner", "Scrum Master", "Developer" };
+		String[] permisos = { "Administrador", "Master Owner", "Scrum Master", "Developer" };
 		user = textField_1.getText();
 		pass = textField.getText();
 		ArrayList<Usuario> usuariosBDD = bdd.getUsuarios();

@@ -36,16 +36,12 @@ public class Main {
 		
 		usuarios = bdd.getUsuarios();
 		
-		System.out.println("Usuarios:");
 		for (Usuario usuario : usuarios) {
 			System.out.print(usuario.getNombre() + " " + usuario.getLogin() + " " + usuario.getPassword() + " " + usuario.getRepPassword() + " " + usuario.getMail() + " " +usuario.getUserPerm() + " " + "\n");
 		}
-		System.out.println("");
-		System.out.println("Proyectos:");
 		for (Proyectos proyecto : proyectos) {
-			System.out.println(proyecto.getNombre()+" "+proyecto.getDescripcion()+" "+proyecto.getScrumMaster()+" "+proyecto.getProductOwner());
+			System.out.println(proyecto.getNombre()+" "+proyecto.getDescripcion()+" "+proyecto.getScrumMaster()+" "+proyecto.getProductOwner()+" "+"\n");
 		}
-		System.out.println("");
 		new InternalFrame(bdd);
 	}
 }

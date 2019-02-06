@@ -7,6 +7,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,20 +30,20 @@ public class Especificacion extends JPanel{
 	private static String nSplit, txtTArea, horas;
 	private static boolean marcado;
 	
-	public Especificacion() {
+	public Especificacion(String datosUser, String desc,String sprintt,String hores) {
 		String[] sprints = {"Sprint 1","Sprint 2","Sprint 3"};
 		
 //		String datos = datosUser.substring(datosUser.indexOf("("+1), datosUser.indexOf(""));
 //		
 //		if(datos == "Developer") {
+//			textArea.setEnabled(false);
 //			chMarcar.setEnabled(false);
 //			btnGuardarCambios.setEnabled(false);
 //			spinner.setEnabled(false);
 //			comboBox.setEnabled(false);
-//			btnGuardarCambios.setEnabled(false);
 //		}
 		
-		textArea = new JTextArea();
+		textArea = new JTextArea(desc);
 		scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -52,14 +53,15 @@ public class Especificacion extends JPanel{
 		btnGuardarCambios = new JButton("Guardar cambios");
 		
 		spinner = new JSpinner();
-		
+		int hora= Integer.parseInt(hores);
+		spinner.setValue(hora);
 		lblNumeroDeHoras = new JLabel("Numero de horas");
 		
 		comboBox = new JComboBox();
 		for (int i = 0; i < sprints.length; i++) {
 			comboBox.addItem(sprints[i]);
 		}
-		
+		comboBox.getSelectedItem().equals(sprintt);
 		btnGuardarCambios.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -71,6 +73,7 @@ public class Especificacion extends JPanel{
 				}else {
 					marcado = false;
 				}
+				System.out.println("");
 				System.out.println(nSplit + " " + horas + " " + marcado + "\n" + txtTArea);
 				// Falta saber como guardar estos datos.
 			}
@@ -113,6 +116,7 @@ public class Especificacion extends JPanel{
 					.addContainerGap(19, Short.MAX_VALUE))
 		);
 		setLayout(gl_panel_1);
+		setVisible(true);
 	}
 
 	public static String getnSplit() {

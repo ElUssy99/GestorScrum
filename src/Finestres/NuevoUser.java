@@ -130,6 +130,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		p.add(lblRepetirPassword, gbc_lblRepetirPassword);
 
 		passField = new JPasswordField(10);
+		passField.setEnabled(false);
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.gridwidth = 4;
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -148,7 +149,6 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		p.add(passFieldRep, gbc_textField_11);
 
 		tfLogin = new JTextField(10);
-		tfLogin.setEnabled(false);
 		GridBagConstraints gbc_12 = new GridBagConstraints();
 		gbc_12.gridwidth = 4;
 		gbc_12.fill = GridBagConstraints.HORIZONTAL;
@@ -215,7 +215,7 @@ public class NuevoUser extends JInternalFrame implements ActionListener {
 		});
 
 		comboBox = new JComboBox();
-		String[] permisos = { "Seleccionar un perfil de usuario", "Product Owner", "Scrum Master", "Developer", "Administrador" };
+		String[] permisos = { "Seleccionar un perfil de usuario", "Master Owner", "Scrum Master", "Developer", "Administrador" };
 		for (int i = 0; i < permisos.length; i++) {
 			comboBox.addItem(permisos[i]);
 		}
