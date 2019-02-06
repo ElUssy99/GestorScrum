@@ -16,7 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import Objetos.BaseDeDatos;
 import Objetos.Proyectos;
