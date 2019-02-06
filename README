@@ -12,6 +12,14 @@ Usuarios creados para poder entra en el Programa:
   Password: adios
   Permisos: Administrador
 -Usuario 3:
-  Login: user3
+  Login: userSM
   Password: jaja
   Permisos: Scrum Master
+-Usuario 3:
+  Login: userDev
+  Password: jaja
+  Permisos: Developer
+-Usuario 3:
+  Login: userPO
+  Password: jaja
+  Permisos: Product Owner
