@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import Objetos.BaseDeDatos;
-import Objetos.Usuario;
 
 import javax.swing.JMenuBar;
 
@@ -17,7 +16,6 @@ import javax.swing.JMenu;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
 
